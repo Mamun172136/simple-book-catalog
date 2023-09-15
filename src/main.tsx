@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store.ts";
 import { router } from "./Routes/Routes.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "aos/dist/aos.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
