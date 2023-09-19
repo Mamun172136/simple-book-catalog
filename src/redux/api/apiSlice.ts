@@ -8,9 +8,18 @@ export const api = createApi({
       query: () => "/books",
     }),
     singleBook: builder.query({
-      query: (id) => "/books/${id}",
+      query: (id) => "/book/${id}",
+    }),
+
+    postComment: builder.mutation({
+      query: ({ id, data }) => ({
+        url: "/comment/${id}",
+        method: "POST",
+        body: data,
+      }),
     }),
   }),
 });
 
-export const { useGetBooksQuery, useSingleBookQuery } = api;
+export const { useGetBooksQuery, useSingleBookQuery, usePostCommentMutation } =
+  api;
