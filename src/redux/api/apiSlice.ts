@@ -18,6 +18,7 @@ export const api = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["comments"],
     }),
 
     getComment: builder.query({
