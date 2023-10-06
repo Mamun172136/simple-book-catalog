@@ -7,7 +7,9 @@ export const api = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => "/books",
+      providesTags: ["comments"],
     }),
+
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
     }),
@@ -17,6 +19,33 @@ export const api = createApi({
         url: `/comment/${id}`,
         method: "POST",
         body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
+
+    postBook: builder.mutation({
+      query: (data) => ({
+        url: `/book`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
+
+    updateBook: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/book/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["comments"],
+    }),
+
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/book/${id}`,
+        method: "DELETE",
+        // body: data,
       }),
       invalidatesTags: ["comments"],
     }),
@@ -33,4 +62,7 @@ export const {
   useSingleBookQuery,
   usePostCommentMutation,
   useGetCommentQuery,
+  usePostBookMutation,
+  useDeleteBookMutation,
+  useUpdateBookMutation,
 } = api;

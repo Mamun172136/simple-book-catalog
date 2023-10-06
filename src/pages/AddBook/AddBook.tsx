@@ -1,12 +1,33 @@
+import { toast } from "react-toast";
+import { useAppSelector } from "../../redux/hook";
+import { usePostBookMutation } from "../../redux/api/apiSlice";
+import { useNavigate } from "react-router-dom";
+
 const AddBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+  const [postBook, { isLoading, isError, isSuccess }] = usePostBookMutation();
+
+  console.log(isLoading);
+  console.log(isError);
+  console.log(isSuccess);
+  const navigate = useNavigate();
+
   const handleAddBook = (event: any) => {
     event.preventDefault();
     const form = event.target;
     const title = form.title.value;
     const author = form.author.value;
     const genre = form.genre.value;
-    const Publication = form.publication.value;
+    const publicationDate = form.publication.value;
     const photo = form.photo.value;
+    const email = user?.email;
+    console.log(title, author, genre, publicationDate);
+    const newBook = { title, author, genre, publicationDate, photo, email };
+
+    console.log(newBook);
+    postBook(newBook);
+    toast("Book added successfully");
+    navigate("/allBooks");
   };
   return (
     <div className="p-24 bg-[#F4F3F0]">
@@ -75,12 +96,25 @@ const AddBook = () => {
           </div>
         </div>
 
-        <div className="">
+        {/* <div className="">
           <input
             type="submit"
             value="add book"
             className="btn btn-block btn-neutral"
           />
+        </div> */}
+
+        <div className="">
+          {isLoading && <p>Loading...</p>}
+          {isSuccess && <p>Book added successfully!</p>}
+          {isError && <p>Error adding the book. Please try again.</p>}
+          {!isLoading && (
+            <input
+              type="submit"
+              value="Add Book"
+              className="btn btn-block btn-neutral"
+            />
+          )}
         </div>
       </form>
     </div>
