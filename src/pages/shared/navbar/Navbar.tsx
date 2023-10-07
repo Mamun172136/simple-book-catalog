@@ -135,10 +135,11 @@ import { useState } from "react";
 import { useGetBooksQuery } from "../../../redux/api/apiSlice";
 
 import { IBook } from "../../../types/globalTypes";
+import { getDate, getGenre, getSearchTerm } from "../../../redux/filterSlice";
 
 const Navbar = () => {
   const { user } = useAppSelector((state) => state.user);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerms, setSearchTerm] = useState("");
   const dispatch = useAppDispatch();
   const handleLogOut = () => {
     console.log("Logout");
@@ -147,27 +148,51 @@ const Navbar = () => {
       dispatch(setUser(null));
     });
   };
-  const { data, isLoading } = useGetBooksQuery(undefined);
+
+  // const { data, isLoading } = useGetBooksQuery(undefined);
+
+  let { searchTerm } = useAppSelector((state) => state.search);
+
+  // console.log("searchTerm from allbookdata", searchTerm);
+  let { publicationDate } = useAppSelector((state) => state.search);
+
+  let { genre } = useAppSelector((state) => state.search);
+  (searchTerm = null), (publicationDate = null), (genre = null);
+  const { data, isLoading } = useGetBooksQuery(
+    {
+      searchTerm: searchTerm,
+      genre: genre,
+      publicationDate: publicationDate,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
+
   const uniqueGenres = [
     ...new Set(data?.data.map((item: { genre: any }) => item.genre)),
   ];
+
   const uniqueDAtes = [
     ...new Set(
       data?.data.map((item: { publicationDate: any }) => item.publicationDate)
     ),
   ];
+
   console.log(isLoading);
+
   const handleSearch = () => {
-    console.log("Search Term:", searchTerm);
+    dispatch(getSearchTerm(searchTerms));
+    console.log("Search Term from navbar:", searchTerms);
     // You can perform any actions related to searching here
   };
 
   const handleFilter = (value: any) => {
     console.log("Selected genre:", value);
+    dispatch(getGenre(value));
     // You can perform any actions related to filtering here
   };
   const handleFilterDate = (value: any) => {
     console.log("Selected Date:", value);
+    dispatch(getDate(value));
     // You can perform any actions related to filtering here
   };
 

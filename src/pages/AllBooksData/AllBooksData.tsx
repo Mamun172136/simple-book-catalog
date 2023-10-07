@@ -1,9 +1,37 @@
+import { useDispatch } from "react-redux";
 import AllBookCard from "../../components/AllBookCard";
 import { useGetBooksQuery } from "../../redux/api/apiSlice";
+import { useAppSelector } from "../../redux/hook";
 import { IBook } from "../../types/globalTypes";
+import { getDate, getGenre, getSearchTerm } from "../../redux/filterSlice";
+import React, { useEffect } from "react";
 
 const AllBooksData = () => {
-  const { data, isLoading } = useGetBooksQuery(undefined);
+  let { searchTerm } = useAppSelector((state) => state.search);
+
+  // console.log("searchTerm from allbookdata", searchTerm);
+  const { publicationDate } = useAppSelector((state) => state.search);
+
+  const { genre } = useAppSelector((state) => state.search);
+
+  const { data, isLoading } = useGetBooksQuery(
+    {
+      searchTerm: searchTerm,
+      genre: genre,
+      publicationDate: publicationDate,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    console.log(" searchterm in useEffect", searchTerm);
+    dispatch(getSearchTerm(null));
+    dispatch(getGenre(null));
+    dispatch(getDate(null));
+  }, [dispatch]);
+
   return (
     <div>
       <h2 className="text-3xl font-extrabold">Featured Books</h2>

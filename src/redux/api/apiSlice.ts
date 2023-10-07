@@ -5,8 +5,14 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
   tagTypes: ["comments"],
   endpoints: (builder) => ({
+    // getBooks: builder.query({
+    //   query: (searchTerm,) => `/books?searchTerm=${searchTerm}`,
+    //   providesTags: ["comments"],
+    // }),
+
     getBooks: builder.query({
-      query: () => "/books",
+      query: ({ searchTerm, genre, publicationDate }) =>
+        `/books?searchTerm=${searchTerm}&genre=${genre}&publicationDate=${publicationDate}`,
       providesTags: ["comments"],
     }),
 
