@@ -15,6 +15,10 @@ export const api = createApi({
         `/books?searchTerm=${searchTerm}&genre=${genre}&publicationDate=${publicationDate}`,
       providesTags: ["comments"],
     }),
+    getFeaturedBooks: builder.query({
+      query: () => `/featuredBooks`,
+      providesTags: ["comments"],
+    }),
 
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
@@ -71,4 +75,5 @@ export const {
   usePostBookMutation,
   useDeleteBookMutation,
   useUpdateBookMutation,
+  useGetFeaturedBooksQuery,
 } = api;

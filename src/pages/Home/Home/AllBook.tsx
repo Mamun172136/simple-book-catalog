@@ -1,9 +1,9 @@
 import BookCard from "../../../components/BookCard";
-import { useGetBooksQuery } from "../../../redux/api/apiSlice";
+import { useGetFeaturedBooksQuery } from "../../../redux/api/apiSlice";
 import { IBook } from "../../../types/globalTypes";
 
 const AllBook = () => {
-  const { data, isLoading } = useGetBooksQuery(undefined);
+  const { data, isLoading } = useGetFeaturedBooksQuery(undefined);
   return (
     <div>
       <h2 className="text-3xl font-extrabold">Featured Books</h2>

@@ -7,12 +7,14 @@ import {
   useGetCommentQuery,
   usePostCommentMutation,
 } from "../../redux/api/apiSlice";
+import { useAppSelector } from "../../redux/hook";
 
 const ProductReview = ({ id }: IProps) => {
   const { data } = useGetCommentQuery(id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
+
   const [postComment, { isLoading, isError, isSuccess }] =
     usePostCommentMutation();
 
@@ -38,6 +40,8 @@ const ProductReview = ({ id }: IProps) => {
     setInputValue(event.target.value);
   };
 
+  const { user } = useAppSelector((state) => state.user);
+
   return (
     <div className="max-w-7xl mx-auto mt-5">
       <hr className="w-full border-t border-gray-300 my-2" />
@@ -57,10 +61,19 @@ const ProductReview = ({ id }: IProps) => {
           placeholder="write your review"
           className="  textarea textarea-bordered textarea-xs w-full max-w-xs"
         ></textarea>
-        <button className="btn btn-neutral" type="submit">
+        <button
+          className="btn btn-neutral"
+          type="submit"
+          disabled={!user?.email}
+        >
           {" "}
           submit{" "}
         </button>
+        {!user?.email && (
+          <p className="text-red-500">
+            You are not authorized to leave review this book.
+          </p>
+        )}
       </form>
 
       <div className="mt-10">
@@ -70,7 +83,7 @@ const ProductReview = ({ id }: IProps) => {
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar> */}
-            <li> user review: {comment}</li>
+            <li className="text-3xl p-3"> user review: {comment}</li>
           </div>
         ))}
       </div>

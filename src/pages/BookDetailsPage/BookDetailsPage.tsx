@@ -110,17 +110,15 @@ const BookDetailsPage = () => {
                     onClick={() => handleDelete(id!)}
                     className={`btn btn-primary ${isDeleting ? "loading" : ""}`}
                     // !isUserAuthorized
-                    disabled={isDeleting}
+                    disabled={isDeleting || !isUserAuthorized}
                   >
                     DELETE BOOK
                   </button>
-                  {/* {!isUserAuthorized && (
+                  {!isUserAuthorized && (
                     <p className="text-red-500">
                       You are not authorized to delete this book.
                     </p>
-
-
-                  )} */}
+                  )}
                 </div>
               </div>
             </div>

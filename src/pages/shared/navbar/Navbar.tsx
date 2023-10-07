@@ -126,7 +126,7 @@
 
 // export default Navbar;
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { auth } from "../../../lib/firebase";
 import { signOut } from "firebase/auth";
@@ -195,6 +195,17 @@ const Navbar = () => {
     dispatch(getDate(value));
     // You can perform any actions related to filtering here
   };
+
+  const location = useLocation();
+
+  // Check if the current route is not /login or /signup
+  const shouldRenderSearch = ![
+    "/login",
+    "/signup",
+    "/bookDetailsPages",
+    "/",
+  ].includes(location.pathname);
+  console.log(location.pathname);
 
   return (
     <div>
@@ -589,20 +600,20 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="search-bar flex justify-center">
-        <input
-          type="text"
-          placeholder="Search books..."
-          className="border rounded p-1"
-          name="search"
-          // You can use state to control the value of the input
-          // value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={handleSearch} className="btn btn-primary ml-2">
-          Search
-        </button>
-      </div>
+      {shouldRenderSearch && (
+        <div className="search-bar flex justify-center my-8">
+          <input
+            type="text"
+            placeholder="Search books..."
+            className="border rounded p-1"
+            name="search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={handleSearch} className="btn btn-primary ml-2">
+            Search
+          </button>
+        </div>
+      )}
     </div>
   );
 };

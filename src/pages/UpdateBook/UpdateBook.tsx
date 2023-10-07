@@ -40,7 +40,7 @@ const AddBook = () => {
     };
     updateBook(options);
     toast("Book updated successfully");
-    // navigate("/allBooks");
+    navigate("/allBooks");
   };
   return (
     <div className="p-24 bg-[#F4F3F0]">
