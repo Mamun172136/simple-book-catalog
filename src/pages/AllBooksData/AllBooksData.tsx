@@ -4,7 +4,7 @@ import { useGetBooksQuery } from "../../redux/api/apiSlice";
 import { useAppSelector } from "../../redux/hook";
 import { IBook } from "../../types/globalTypes";
 import { getDate, getGenre, getSearchTerm } from "../../redux/filterSlice";
-import React, { useEffect } from "react";
+import React from "react";
 
 const AllBooksData = () => {
   let { searchTerm } = useAppSelector((state) => state.search);
@@ -20,7 +20,7 @@ const AllBooksData = () => {
       genre: genre,
       publicationDate: publicationDate,
     },
-    { refetchOnMountOrArgChange: true }
+    { refetchOnMountOrArgChange: true, pollingInterval: 1000 }
   );
 
   const dispatch = useDispatch();
@@ -33,15 +33,32 @@ const AllBooksData = () => {
   }, [dispatch]);
 
   return (
+    // <div>
+    //   <h2 className="text-3xl font-extrabold">Featured Books</h2>
+    //   {isLoading ? (
+    //     <p>Loading...</p>
+    //   ) : (
+    //     <div className="  grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    //       {data?.data.map((item: IBook) => (
+    //         <AllBookCard key={item._id} item={item} />
+    //       ))}
+    //     </div>
+    //   )}
+    // </div>
+
     <div>
       <h2 className="text-3xl font-extrabold">Featured Books</h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className="  grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {data?.data.map((item: IBook) => (
-            <AllBookCard key={item._id} item={item} />
-          ))}
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {data?.data.length === 0 ? (
+            <p className="text-center text-3xl">No books found.</p>
+          ) : (
+            data?.data.map((item: IBook) => (
+              <AllBookCard key={item._id} item={item} />
+            ))
+          )}
         </div>
       )}
     </div>

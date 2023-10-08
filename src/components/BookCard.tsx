@@ -1,7 +1,6 @@
 // const BookCard = ({ item }) => {
 //   const { title, author, genre, photo } = item;
 
-import { Link } from "react-router-dom";
 import { IBook } from "../types/globalTypes";
 import "./book.css";
 interface IProps {
@@ -36,7 +35,7 @@ interface IProps {
 // export default BookCard;
 
 const BookCard = ({ item }: IProps) => {
-  const { title, author, genre, photo } = item;
+  const { title, photo } = item;
 
   // Define responsive image styles
   const imageStyle = {

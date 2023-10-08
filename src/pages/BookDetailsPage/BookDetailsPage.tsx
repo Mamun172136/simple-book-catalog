@@ -21,14 +21,21 @@ const BookDetailsPage = () => {
 
   const { id } = useParams<{ id: string }>(); // Specify that id is a string
 
-  const { data: book, isLoading, error } = useSingleBookQuery(id);
+  const {
+    data: book,
+    isLoading,
+    error,
+  } = useSingleBookQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 1000,
+  });
 
   const { user } = useAppSelector((state) => state.user);
 
   const [isDeleting, setIsDeleting] = React.useState(false);
 
   const [deleteBook, options] = useDeleteBookMutation();
-
+  console.log(options);
   const navige = useNavigate();
 
   const isUserAuthorized = user?.email === book?.email;
@@ -58,6 +65,7 @@ const BookDetailsPage = () => {
         })
         .catch((error) => {
           // Handle deletion error
+          console.log(error);
           toast("Error deleteing book");
         })
         .finally(() => {

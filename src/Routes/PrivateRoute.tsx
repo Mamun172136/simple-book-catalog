@@ -9,11 +9,11 @@ export default function PrivateRoute({ children }: IProps) {
   const location = useLocation();
   const { user, isLoading } = useAppSelector((state) => state.user);
 
-  if (isLoading) {
-    return <p> loading .....</p>;
-  }
+  // if (isLoading) {
+  //   return <p> loading .....</p>;
+  // }
 
-  if (!user.email && !isLoading) {
+  if (!user.email && isLoading) {
     return <Navigate state={{ from: location }} replace to="/login"></Navigate>;
   }
   return children;

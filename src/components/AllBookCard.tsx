@@ -6,7 +6,7 @@ interface IProps {
 }
 
 const AllBookCard = ({ item }: IProps) => {
-  const { title, author, genre, photo, publicationDate, _id } = item;
+  const { title, author, genre, photo, publicationDate } = item;
 
   // Define responsive image styles
   const imageStyle = {

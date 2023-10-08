@@ -105,7 +105,7 @@ const AddBook = () => {
         </div> */}
 
         <div className="">
-          {isLoading && <p>Loading...</p>}
+          {/* {isLoading && <p>Loading...</p>} */}
           {isSuccess && <p>Book added successfully!</p>}
           {isError && <p>Error adding the book. Please try again.</p>}
           {!isLoading && (

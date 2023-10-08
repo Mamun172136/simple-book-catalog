@@ -4,7 +4,7 @@ import Marque from "./Marque";
 
 import Aos from "aos";
 import AllBook from "./AllBook";
-import BookDetailsPage from "../../BookDetailsPage/BookDetailsPage";
+
 const Home = () => {
   useEffect(() => {
     Aos.init();

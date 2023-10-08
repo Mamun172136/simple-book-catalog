@@ -1,9 +1,42 @@
+// import { createSlice } from "@reduxjs/toolkit";
+// import type { PayloadAction } from "@reduxjs/toolkit";
+// interface filter {
+//   searchTerm: undefined | string | null;
+//   publicationDate: string | null;
+//   genre: string | null;
+// }
+
+// const initialState: filter = {
+//   searchTerm: null,
+//   publicationDate: null,
+//   genre: null,
+// };
+
+// const filterSlice = createSlice({
+//   name: "search",
+//   initialState,
+//   reducers: {
+//     getSearchTerm: (state, action: PayloadAction<string | null>) => {
+//       state.searchTerm = action.payload;
+//     },
+//     getGenre: (state, action: PayloadAction<string | null>) => {
+//       state.genre = action.payload;
+//     },
+//     getDate: (state, action: PayloadAction<string | null>) => {
+//       state.publicationDate = action.payload;
+//     },
+//   },
+// });
+
+// export const { getSearchTerm, getGenre, getDate } = filterSlice.actions;
+// export default filterSlice.reducer;
+
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 interface filter {
-  searchTerm: undefined | string | null;
-  publicationDate: string | null;
-  genre: string | null;
+  searchTerm: number | string | null;
+  publicationDate: string | number | null;
+  genre: string | number | null;
 }
 
 const initialState: filter = {
@@ -16,13 +49,13 @@ const filterSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    getSearchTerm: (state, action: PayloadAction<string | null>) => {
+    getSearchTerm: (state, action: PayloadAction<string | number | null>) => {
       state.searchTerm = action.payload;
     },
-    getGenre: (state, action: PayloadAction<string | null>) => {
+    getGenre: (state, action: PayloadAction<string | number | null>) => {
       state.genre = action.payload;
     },
-    getDate: (state, action: PayloadAction<string | null>) => {
+    getDate: (state, action: PayloadAction<string | number | null>) => {
       state.publicationDate = action.payload;
     },
   },

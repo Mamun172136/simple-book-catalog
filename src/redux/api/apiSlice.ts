@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://simple-book-catalog-server-nine.vercel.app/",
+    // baseUrl: "http://localhost:5000/",
+  }),
   tagTypes: ["comments"],
   endpoints: (builder) => ({
     // getBooks: builder.query({
@@ -22,6 +25,7 @@ export const api = createApi({
 
     singleBook: builder.query({
       query: (id) => `/book/${id}`,
+      providesTags: ["comments"],
     }),
 
     postComment: builder.mutation({

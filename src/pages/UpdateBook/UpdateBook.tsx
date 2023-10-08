@@ -13,7 +13,10 @@ const AddBook = () => {
     useUpdateBookMutation();
 
   const { id } = useParams<{ id: string }>(); // Specify that id is a string
-  const { data: book } = useSingleBookQuery(id);
+  const { data: book } = useSingleBookQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 1000,
+  });
   console.log("book", book, id);
 
   console.log(isLoading);

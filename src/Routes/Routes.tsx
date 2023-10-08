@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
 import AddBook from "../pages/AddBook/AddBook";
@@ -8,14 +8,15 @@ import Login from "../pages/LogIn/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import AllBooksData from "../pages/AllBooksData/AllBooksData";
 import PrivateRoute from "./PrivateRoute";
+import App from "../App";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
+    element: <App />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home></Home>,
       },
       {
@@ -34,18 +35,20 @@ export const router = createBrowserRouter([
         path: "/bookDetailsPage/:id",
         element: <BookDetailsPage></BookDetailsPage>,
       },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
-      {
-        path: "/signup",
-        element: <SignUp></SignUp>,
-      },
+
       {
         path: "/allBooks",
         element: <AllBooksData></AllBooksData>,
       },
     ],
+  },
+
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/signup",
+    element: <SignUp></SignUp>,
   },
 ]);

@@ -134,7 +134,7 @@ import { setUser } from "../../../redux/user/userSlice";
 import { useState } from "react";
 import { useGetBooksQuery } from "../../../redux/api/apiSlice";
 
-import { IBook } from "../../../types/globalTypes";
+// import { IBook } from "../../../types/globalTypes";
 import { getDate, getGenre, getSearchTerm } from "../../../redux/filterSlice";
 
 const Navbar = () => {
@@ -202,8 +202,9 @@ const Navbar = () => {
   const shouldRenderSearch = ![
     "/login",
     "/signup",
-    "/bookDetailsPages",
+    "/bookDetailsPages/",
     "/",
+    "/addBook",
   ].includes(location.pathname);
   console.log(location.pathname);
 
@@ -235,6 +236,9 @@ const Navbar = () => {
               <li>
                 <Link to="/allbooks">All Books</Link>
               </li>
+              <li>
+                <Link to="/addBook">Add NEW</Link>
+              </li>
               {/* <li>
                 <a>Parent</a>
                 <ul className="p-2">
@@ -250,7 +254,7 @@ const Navbar = () => {
                 <details>
                   <summary>Filtering Genre</summary>
                   <ul className="p-2">
-                    {uniqueGenres.map((item: any, index: any) => (
+                    {uniqueGenres.map((item: any) => (
                       <li className="group">
                         <a
                           onClick={() => handleFilter(item)}
@@ -375,7 +379,7 @@ const Navbar = () => {
                 <details>
                   <summary>Filtering PublicationDAte</summary>
                   <ul className="p-2">
-                    {uniqueDAtes.map((item: any, index: any) => (
+                    {uniqueDAtes.map((item: any) => (
                       <li className="group">
                         <a
                           onClick={() => handleFilterDate(item)}
@@ -400,7 +404,7 @@ const Navbar = () => {
               <Link to="/allbooks">All Books</Link>
             </li>
             <li>
-              <Link to="/addBook">Add Book</Link>
+              <Link to="/addBook">Add NEW</Link>
             </li>
             {/* <li tabIndex={0}>
               <details>
@@ -492,7 +496,7 @@ const Navbar = () => {
               <details>
                 <summary>Filtering Genre</summary>
                 <ul className="p-2">
-                  {uniqueGenres.map((item: any, index: any) => (
+                  {uniqueGenres.map((item: any) => (
                     <li className="group">
                       <a
                         onClick={() => handleFilter(item)}
@@ -545,7 +549,7 @@ const Navbar = () => {
               <details>
                 <summary>Filtering PublicatonDate</summary>
                 <ul className="p-2">
-                  {uniqueDAtes.map((item: any, index: any) => (
+                  {uniqueDAtes.map((item: any) => (
                     <li className="group">
                       <a
                         onClick={() => handleFilterDate(item)}

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toast";
@@ -128,7 +128,15 @@ const Login = () => {
               </div> */}
 
               <div className="form-control mt-6">
-                {isLoading ? (
+                {/* //Show a loading indicator or text when isLoading is true
+                <p>Loading...</p>
+                // Show the login button when isLoading is false */}
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Login"
+                />
+                {/* {isLoading ? (
                   // Show a loading indicator or text when isLoading is true
                   <p>Loading...</p>
                 ) : (
@@ -138,7 +146,7 @@ const Login = () => {
                     type="submit"
                     value="Login"
                   />
-                )}
+                )} */}
               </div>
             </form>
             <p>
