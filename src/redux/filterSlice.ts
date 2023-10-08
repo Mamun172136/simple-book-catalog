@@ -40,9 +40,9 @@ interface filter {
 }
 
 const initialState: filter = {
-  searchTerm: null,
-  publicationDate: null,
-  genre: null,
+  searchTerm: "",
+  publicationDate: "",
+  genre: "",
 };
 
 const filterSlice = createSlice({

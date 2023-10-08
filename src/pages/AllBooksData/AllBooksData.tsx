@@ -19,17 +19,17 @@ const AllBooksData = () => {
       searchTerm: searchTerm,
       genre: genre,
       publicationDate: publicationDate,
-    },
-    { refetchOnMountOrArgChange: true, pollingInterval: 1000 }
+    }
+    // { refetchOnMountOrArgChange: true, pollingInterval: 1000 }
   );
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     console.log(" searchterm in useEffect", searchTerm);
-    dispatch(getSearchTerm(null));
-    dispatch(getGenre(null));
-    dispatch(getDate(null));
+    dispatch(getSearchTerm(""));
+    dispatch(getGenre(""));
+    dispatch(getDate(""));
   }, [dispatch]);
 
   return (

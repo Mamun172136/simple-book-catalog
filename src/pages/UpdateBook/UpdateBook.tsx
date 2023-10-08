@@ -125,14 +125,14 @@ const AddBook = () => {
           />
         </div> */}
 
-        <div className="">
+        {/* <div className="">
           <input
             type="submit"
             value="Update Book"
             className="btn btn-block btn-neutral"
           />
-        </div>
-        {/* <div className="">
+        </div> */}
+        <div className="">
           {isLoading && <p>Loading...</p>}
           {isSuccess && <p>Book updated successfully!</p>}
           {isError && <p>Error updating the book. Please try again.</p>}
@@ -143,7 +143,7 @@ const AddBook = () => {
               className="btn btn-block btn-neutral"
             />
           )}
-        </div> */}
+        </div>
       </form>
     </div>
   );
